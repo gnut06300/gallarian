@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+    <h1>test categories</h1>
+    {% if categories is empty  %} 
+        <p>Il n'y a pas de données</p>
+    {% else %}
+        {% for categorie in categories %}
+            {{ categorie.name }}<br>
+            {{ categorie.content|striptags('<br></i>')|raw}}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
