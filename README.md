@@ -9,3 +9,4 @@ Cette commande est
 symfony console doctrine:database:create
 ou 
 symfony console d:d:c
+symfony avec un m
