@@ -6,7 +6,9 @@ use App\Entity\Category;
 use App\Form\CategoryFormType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Stmt\Return_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,6 +72,19 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
         
         ]);
+    }
+
+
+    /**
+     * @Route("/categories/update/{id}", name="categories_update")
+     */
+    public function update(Category $category)
+    {
+        $form = $this->createForm(CategoryFormType::class, $category);
+    
+        Return $this->render('category/update.html.twig',
+            ['updateForm' => $form->createView()]  
+        );
     }
     
 }
