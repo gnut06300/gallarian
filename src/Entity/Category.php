@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -48,6 +49,12 @@ class Category
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    public function __construct()
+    {
+        $this->createdAt=new DateTime();
+        $this->isActived= true;
+    }
 
     public function getId(): ?int
     {
