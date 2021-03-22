@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use dateTime;
-
+use Doctrine\ORM\EntityManager;
 
 class CategoryController extends AbstractController
 {
@@ -97,6 +97,20 @@ class CategoryController extends AbstractController
             ['updateForm' => $form->createView()]
         );
 
+    }
+
+    /**
+     * @Route("/categories/delete/{id}", name="delete_categorie")
+     */
+    public function delete(Category $category, EntityManagerInterface $entityManagerInterface)
+    {
+        //supprimer la catégorie récupérée
+        $entityManagerInterface->remove($category);
+
+        //On demande à doctrine d'établir les changements
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute('categories');
     }
     
 }

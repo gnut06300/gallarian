@@ -10,11 +10,12 @@
 		        <p>Il n'y a pas de données</p>
 		    {% else %}
 			{% for categorie in categories %}
-			        <div class="card shadow-1 rounded-3">
+			    <div class="card shadow-1 rounded-3">
 	    			<div class="card-content">
 			            <div class="card-header">{{ categorie.name }}</div>
 			            {{ categorie.content|striptags('<br></i>')|raw}}
 			        </div>
+					<a href="{{ path('delete_categorie',{"id":categorie.id})}}" class="btn shadow-1 rounded-1 blue">Supprimer</a>
 		        </div>
 		        {% endfor %}
 		    {% endif %}
