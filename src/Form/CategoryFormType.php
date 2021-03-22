@@ -14,6 +14,12 @@ class CategoryFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['edit']==true) {
+            $builder
+            ->setMethod("PATCH");
+
+        }
+
         $builder
             ->add('name', TextType::class, ['attr'=>['placeholder'=>'Entrez le nom de la Catégories', 'class'=>'test'],
                 'label'=>'Entrez le nom de la Catégories'])
@@ -31,6 +37,7 @@ class CategoryFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
-        ]);
+            'edit'=>false // a ajouter
+        ])->setAllowedTypes("edit","bool");// a ajouter
     }
 }

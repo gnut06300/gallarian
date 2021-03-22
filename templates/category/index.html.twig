@@ -5,7 +5,12 @@
 {% block body %}
 	<div class="container">
 	    <h1>Les categories</h1>
-	    <div class="grix xs1 sm3 gutter-xs4 container">
+    	<hr>
+    	<div class="txt-center">
+    		<a class="mt-5 mb-5 btn shadow-1 rounded-1 blue" href="{{path("categories_new")}}">Créer une Catégorie</a>
+    	</div>
+   		<hr>
+	    <div class="grix xs1 sm4 gutter-xs4 container">
 		    {% if categories is empty  %} 
 		        <p>Il n'y a pas de données</p>
 		    {% else %}
@@ -15,7 +20,13 @@
 			            <div class="card-header">{{ categorie.name }}</div>
 			            {{ categorie.content|striptags('<br></i>')|raw}}
 			        </div>
-					<a href="{{ path('delete_categorie',{"id":categorie.id})}}" class="btn shadow-1 rounded-1 blue">Supprimer</a>
+			         	<a class="btn shadow-1 rounded-1 blue" href="{{path('categories_update', {"id":categorie.id})}}">Editer</a>
+			        <form method="post" action="{{path('delete_categorie', {"id":categorie.id})}}">
+			        	<input type="hidden" name="_method" value="delete">
+			        	<button class="btn shadow-1 rounded-1 blue">Supprimer</button>
+			        </form>
+					{#<a href="{{ path('delete_categorie',{"id":categorie.id})}}" class="btn shadow-1 rounded-1 blue">Supprimer</a>#}
+
 		        </div>
 		        {% endfor %}
 		    {% endif %}

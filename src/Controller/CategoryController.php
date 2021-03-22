@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManager;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/categories", name="categories")
+     * @Route("/categories", name="categories", methods={"GET"})
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
@@ -31,7 +31,7 @@ class CategoryController extends AbstractController
         ]);
     }
     /**
-     * @Route("/categories/new", name="categories_new")
+     * @Route("/categories/new", name="categories_new", methods={"GET","POST"})
      */
     public function newCategory(Request $request,EntityManagerInterface $em,SluggerInterface $slugger): Response
     {
@@ -65,6 +65,7 @@ class CategoryController extends AbstractController
 
             //dd($form->getData()->getName());        
             //dd($form->getData(),$request->request,$category);
+            return $this->redirectToRoute('categories');
 
         }
         return $this->render('category/new.html.twig', [
@@ -75,11 +76,11 @@ class CategoryController extends AbstractController
 
 
     /**
-     * @Route("/categories/update/{id}", name="categories_update")
+     * @Route("/categories/update/{id}", name="categories_update", methods={"GET","PATCH"})
      */
     public function update(Category $category, EntityManagerInterface $em, Request $request)
     {
-        $form = $this->createForm(CategoryFormType::class, $category);
+        $form = $this->createForm(CategoryFormType::class, $category,["edit"=>true]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
@@ -100,7 +101,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/categories/delete/{id}", name="delete_categorie")
+     * @Route("/categories/delete/{id}", name="delete_categorie", methods={"DELETE"})
      */
     public function delete(Category $category, EntityManagerInterface $entityManagerInterface)
     {

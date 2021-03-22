@@ -8,3 +8,12 @@ h1{
 footer{
 	text-align: center;
 }
+hr{
+	width: 100px;
+	height: 2px;
+	background-color: #46AB0F;
+}
+.card{
+	width: 200px;
+
+}
