@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
+use DateTime;//mise à jours de la date
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -52,7 +52,7 @@ class Category
 
     public function __construct()
     {
-        $this->createdAt=new DateTime();
+        $this->createdAt=new DateTime();//mise à jours de la date
         $this->isActived= true;
     }
 
