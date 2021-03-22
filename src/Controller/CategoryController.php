@@ -6,14 +6,13 @@ use App\Entity\Category;
 use App\Form\CategoryFormType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PhpParser\Node\Stmt\Return_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
+use dateTime;
+
 
 class CategoryController extends AbstractController
 {
@@ -78,13 +77,26 @@ class CategoryController extends AbstractController
     /**
      * @Route("/categories/update/{id}", name="categories_update")
      */
-    public function update(Category $category)
+    public function update(Category $category, EntityManagerInterface $em, Request $request)
     {
         $form = $this->createForm(CategoryFormType::class, $category);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $category->setUpdateAt(new DateTime());
+            //persist flush
+            $em->persist($category);//Préparer
+            $em->flush();//Envoyer en bdd
+
+            return $this->redirectToRoute('categories');
+
+        }
     
         Return $this->render('category/update.html.twig',
-            ['updateForm' => $form->createView()]  
+            ['updateForm' => $form->createView()]
         );
+
     }
     
 }
