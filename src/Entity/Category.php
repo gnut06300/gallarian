@@ -50,6 +50,9 @@ class Category
      */
     private $slug;
 
+    /**
+     * Méthode toujours appelée lors de la création d'un objet
+     */
     public function __construct()
     {
         $this->createdAt=new DateTime();//mise à jours de la date
