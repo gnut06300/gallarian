@@ -8,12 +8,14 @@ h1{
 footer{
 	text-align: center;
 }
-hr{
+.divider{
 	width: 100px;
 	height: 2px;
 	background-color: #46AB0F;
+	margin: auto;
 }
 .card{
-	width: 200px;
+	width: 280px;
+	min-height: 220px;
 
 }
