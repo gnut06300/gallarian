@@ -3,13 +3,21 @@
 {% block title %}Hello CategoryController!{% endblock %}
 
 {% block body %}
-    <h1>Les categories</h1>
-    {% if categories is empty  %} 
-        <p>Il n'y a pas de données</p>
-    {% else %}
-        {% for categorie in categories %}
-            {{ categorie.name }}<br>
-            {{ categorie.content|striptags('<br></i>')|raw}}<br>
-        {% endfor %}
-    {% endif %}
+	<div class="container">
+	    <h1>Les categories</h1>
+	    <div class="grix xs1 sm3 gutter-xs4 container">
+		    {% if categories is empty  %} 
+		        <p>Il n'y a pas de données</p>
+		    {% else %}
+			{% for categorie in categories %}
+			        <div class="card shadow-1 rounded-3">
+	    			<div class="card-content">
+			            <div class="card-header">{{ categorie.name }}</div>
+			            {{ categorie.content|striptags('<br></i>')|raw}}
+			        </div>
+		        </div>
+		        {% endfor %}
+		    {% endif %}
+		</div>
+    </div>
 {% endblock %}
