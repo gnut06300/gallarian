@@ -1,14 +1,25 @@
 <?php
-
+//Assert\File qui vérifie qu'il s'agit bien d'un type fichier
+//Assert\Image vérifie qu'il s'agit que de types images
+//Assert\Email vérifie que l'email est valide par rapport aux standarts
+//Assert\Url vérifie que l'url est valide
+//Assert\Regex vérification de filtre (créer son propre filtre)
+//Assert\UserPassword permet de vérifier que le MDP entré est différent de celui de la BDD
+//Assert\EqualTo permet de tester une égalité entre deux propriétés
+//@UniqueEntity(fields={"name", "content"}, message="Vous ne pouvez pas avoir deux fois la même catégorie pour ces champs")
+//@UniqueEntity("content", message="Vous ne pouvez pas avoir deux fois le même content")
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use DateTime;//mise à jours de la date
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="categories")
+ * @UniqueEntity("name", message="Vous ne pouvez pas avoir deux fois la même catégorie")
  */
 class Category
 {
@@ -21,6 +32,8 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255, name="nom")
+     * @Assert\Length(min=5, max=255, minMessage="Ce champ doit faire au minimum {{ limit }} caractères", maxMessage="Ce champ ne doit pas dépasser {{ limit }} caractères")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      */
     private $name;
 

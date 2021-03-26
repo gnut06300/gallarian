@@ -22,8 +22,11 @@ class CategoryFormType extends AbstractType
 
         $builder
             ->add('name', TextType::class, ['attr'=>['placeholder'=>'Entrez le nom de la Catégories', 'class'=>'test'],
-                'label'=>'Entrez le nom de la Catégories'])
+                'label'=>'Entrez le nom de la Catégories',
+                'required' => false //Enlève la validation HTML pour ce champ là
+            ])
             ->add('content', TextareaType::class, [
+                'required' => false,//Enlève la validation HTML pour ce champ là
                 'attr'=>['style'=>'height:200px; width:300px;',
                 'placeholder'=>'Entrez un commentaire de la Catégories'
                 ],
