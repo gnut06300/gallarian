@@ -8,6 +8,7 @@
 //Assert\EqualTo permet de tester une égalité entre deux propriétés
 //@UniqueEntity(fields={"name", "content"}, message="Vous ne pouvez pas avoir deux fois la même catégorie pour ces champs")
 //@UniqueEntity("content", message="Vous ne pouvez pas avoir deux fois le même content")
+// @UniqueEntity("name", message="Vous ne pouvez pas avoir deux fois la même catégorie")
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
@@ -31,7 +32,7 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, name="nom")
+     * @ORM\Column(type="string", length=255, name="nom", unique=true)
      * @Assert\Length(min=5, max=255, minMessage="Ce champ doit faire au minimum {{ limit }} caractères", maxMessage="Ce champ ne doit pas dépasser {{ limit }} caractères")
      * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      */
@@ -52,6 +53,8 @@ class Category
      */
     private $createdAt;
 
+
+    // public $test;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)

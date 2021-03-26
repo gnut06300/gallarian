@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
         //dd($categories);
 
         return $this->render('category/index.html.twig', [
-            'categories'=>$categoryRepository->findAll(),
+            'categories'=>$categoryRepository->findBy(['isActived'=>true],['name'=>'ASC']), //'categories'=>$categoryRepository->findBy(['isActived'=>true],['name'=>'ASC'],4,0),
             //'categories' => $categories,
             //'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll()
         ]);
@@ -58,7 +58,7 @@ class CategoryController extends AbstractController
             //$category->setName($name);
             //$category->setContent($content);
             //$em= $this->getDoctrine()->getManager(); //sans EntityManagerInterface $em uniquement dans un controller extends AbstractController
-            $category->setSlug($slugger->slug($category->getName()."-".uniqid())->lower());
+            $category->setSlug($slugger->slug($category->getName()."-".uniqid())->lower());//lower en minicule
             $em->persist($category);
             $em->flush();
             //dd($name,$content);
@@ -85,6 +85,13 @@ class CategoryController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            //dd($request->request->get('category_form'));
+            //dd($category);
+            if (!isset($request->request->get('category_form')['isActived'])) {
+               $category->setIsActived(false);
+                # code...
+            }
+            
             $category->setUpdateAt(new DateTime());
             //persist flush
             $em->persist($category);//Préparer
