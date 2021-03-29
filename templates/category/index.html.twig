@@ -4,6 +4,13 @@
 
 {% block body %}
 	<div class="container">
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+		    	<div class="p-3 my-2 rounded-2 text-center {{ label }}">
+		            {{ message }}
+		        </div>
+		    {% endfor %}
+		{% endfor %}
 	    <h1>Les categories</h1>
     	<div class="divider my-3"></div>
     	<div class="txt-center">
