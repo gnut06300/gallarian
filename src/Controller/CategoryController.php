@@ -5,14 +5,15 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryFormType;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use dateTime;
-use Doctrine\ORM\EntityManager;
 
 class CategoryController extends AbstractController
 {
@@ -33,7 +34,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/categories/new", name="categories_new", methods={"GET","POST"})
      */
-    public function newCategory(Request $request,EntityManagerInterface $em,SluggerInterface $slugger): Response
+    public function newCategory(Request $request,EntityManagerInterface $em,SluggerInterface $slugger, TranslatorInterface $translator): Response
     {
         $category = new Category();
 
@@ -65,6 +66,7 @@ class CategoryController extends AbstractController
 
             //dd($form->getData()->getName());        
             //dd($form->getData(),$request->request,$category);
+            $this->addFlash('success', $translator->trans("La catégorie a été crée"));
             return $this->redirectToRoute('categories');
 
         }

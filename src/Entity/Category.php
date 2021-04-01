@@ -20,7 +20,7 @@ use DateTime;//mise à jours de la date
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="categories")
- * @UniqueEntity("name", message="Vous ne pouvez pas avoir deux fois la même catégorie")
+ * @UniqueEntity("name", message="category.name.existing")
  */
 class Category
 {

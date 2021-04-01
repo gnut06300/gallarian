@@ -1,7 +1,7 @@
 <nav class="navbar shadow-1 magenta dark-2">
   <a href="#" target="_blank" class="navbar-brand">Axentix</a>
   <div class="navbar-menu ml-auto">
-    <a class="navbar-link active" href="{{ path('categories') }}">Categorie</a>
+    <a class="navbar-link active" href="{{ path('categories') }}">{% trans %}Categorie{% endtrans %}</a>
     {% if app.user %}
     <a class="navbar-link" href="{{ path('app_logout') }}">Déconnexion</a>
     {% else %}
