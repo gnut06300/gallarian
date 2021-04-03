@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
 
             //dd($form->getData()->getName());        
             //dd($form->getData(),$request->request,$category);
-            $this->addFlash('success', $translator->trans("La catégorie a été crée"));
+            $this->addFlash('success', $translator->trans("La catégorie a été crée", [] ,"security"));
             return $this->redirectToRoute('categories');
 
         }
