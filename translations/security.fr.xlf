@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -72,6 +72,10 @@
       <trans-unit id="l9VYRj0" resname="Invalid or expired login link.">
         <source>Invalid or expired login link.</source>
         <target>Lien de connexion invalide ou expiré.</target>
+      </trans-unit>
+      <trans-unit id="ux3ZyeB" resname="La catégorie a été crée">
+        <source>La catégorie a été crée</source>
+        <target>La catégorie a été crée</target>
       </trans-unit>
     </body>
   </file>

@@ -2,8 +2,9 @@
   <a href="#" target="_blank" class="navbar-brand">Axentix</a>
   <div class="navbar-menu ml-auto">
     <a class="navbar-link active" href="{{ path('categories') }}">{% trans %}Categorie{% endtrans %}</a>
+    <a class="navbar-link" href="{{ path('gallery_index') }}">Galerie</a>
     {% if app.user %}
-    <a class="navbar-link" href="{{ path('app_logout') }}">Déconnexion</a>
+    <a class="navbar-link" href="{{ path('app_logout') }}">Deconnexion</a>
     {% else %}
     <a class="navbar-link" href="{{ path('app_register') }}">Inscription</a>
     <a class="navbar-link" href="{{ path('app_login') }}">Connexion</a>
