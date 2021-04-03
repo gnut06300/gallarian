@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\GalleryRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=GalleryRepository::class)
+ * @UniqueEntity("title", message="La galerie existe déjà")
  */
 class Gallery
 {
@@ -20,11 +23,15 @@ class Gallery
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\Length(min=5, max=255, minMessage="Ce champ doit faire au minimum {{ limit }} caractères", maxMessage="Ce champ ne doit pas dépasser {{ limit }} caractères")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     *  @Assert\Length(min=5, max=1000, minMessage="Ce champ doit faire au minimum {{ limit }} caractères", maxMessage="Ce champ ne doit pas dépasser {{ limit }} caractères")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      */
     private $description;
 

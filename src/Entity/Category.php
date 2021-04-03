@@ -15,7 +15,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use DateTime;//mise à jours de la date
+use DateTimeImmutable;//mise à jours de la date non modifiable
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -49,7 +49,7 @@ class Category
     private $isActived;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
@@ -71,7 +71,7 @@ class Category
      */
     public function __construct()
     {
-        $this->createdAt=new DateTime();//mise à jours de la date
+        $this->createdAt=new DateTimeImmutable();//mise à jours de la date
         $this->isActived= true;
     }
 

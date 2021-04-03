@@ -6,13 +6,12 @@ use App\Entity\Gallery;
 use App\Form\GalleryType;
 use App\Repository\GalleryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-/**
-* @Route("/gallery")
-*/
+use Symfony\Component\String\Slugger\SluggerInterface;
+use DateTime;
+
 class GalleryController extends AbstractController
 {
     /**
@@ -62,12 +61,14 @@ class GalleryController extends AbstractController
     /**
      * @Route("/{id}/edit", name="gallery_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Gallery $gallery): Response
+    public function edit(Request $request, Gallery $gallery, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(GalleryType::class, $gallery);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $gallery->setSlug($slugger->slug($gallery->getTitle()."-".uniqid())->lower());
+            $gallery->setUpdatedAt(new DateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('gallery_index');
