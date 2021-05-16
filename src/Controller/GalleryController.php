@@ -16,7 +16,7 @@ class GalleryController extends AbstractController
 {
     /**
      * @Route("/", name="gallery_index", methods={"GET"})
-     */
+    */
     public function index(GalleryRepository $galleryRepository): Response
     {
         return $this->render('gallery/index.html.twig', [
@@ -49,8 +49,10 @@ class GalleryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="gallery_show", methods={"GET"})
-     */
+     * requirements={"slug"="\d+"}
+     * priority=-10 le mettre dans la route
+     * @Route("/{slug}", name="gallery_show", methods={"GET"}, priority=-10)
+    */
     public function show(Gallery $gallery): Response
     {
         return $this->render('gallery/show.html.twig', [
@@ -59,7 +61,7 @@ class GalleryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="gallery_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="gallery_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Gallery $gallery, SluggerInterface $slugger): Response
     {

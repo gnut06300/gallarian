@@ -27,8 +27,8 @@
                 <td>{{ gallery.updatedAt ? gallery.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ gallery.publishAt ? gallery.publishAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('gallery_show', {'id': gallery.id}) }}">show</a>
-                    <a href="{{ path('gallery_edit', {'id': gallery.id}) }}">edit</a>
+                    <a href="{{ path('gallery_show', {'slug': gallery.slug}) }}">show</a>
+                    <a href="{{ path('gallery_edit', {'slug': gallery.slug}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
