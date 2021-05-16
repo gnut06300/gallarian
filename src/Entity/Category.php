@@ -12,6 +12,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -67,12 +69,18 @@ class Category
     private $slug;
 
     /**
+     * @ORM\OneToMany(targetEntity=Gallery::class, mappedBy="category", orphanRemoval=true)
+     */
+    private $galleries;
+
+    /**
      * Méthode toujours appelée lors de la création d'un objet
      */
     public function __construct()
     {
         $this->createdAt=new DateTimeImmutable();//mise à jours de la date
         $this->isActived= true;
+        $this->galleries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +156,36 @@ class Category
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gallery[]
+     */
+    public function getGalleries(): Collection
+    {
+        return $this->galleries;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries[] = $gallery;
+            $gallery->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->galleries->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getCategory() === $this) {
+                $gallery->setCategory(null);
+            }
+        }
 
         return $this;
     }
